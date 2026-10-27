@@ -1,1 +1,57 @@
-
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tumhare liye</title>
+<style>
+:root{color-scheme:dark;--bg1:#2a0a1e;--bg2:#12061a;--tx:#fff1f5;--ac:#ff6f91;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:radial-gradient(circle at 50% 20%,var(--bg1),var(--bg2));color:var(--tx);font-family:Georgia,'Times New Roman',serif;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+.card{position:relative;z-index:2;max-width:480px;padding:28px 24px}
+h1{font-weight:normal;font-size:1.6rem;color:var(--ac);margin:0 0 22px}
+.l{font-size:1.15rem;line-height:1.7;margin:6px 0;opacity:0;transform:translateY(10px);transition:opacity 1.2s,transform 1.2s}
+.l.on{opacity:1;transform:none}
+.btns{margin-top:26px;display:none;gap:12px;justify-content:center;flex-wrap:wrap}
+.btns.on{display:flex}
+button{font:inherit;font-size:1rem;padding:12px 22px;border-radius:999px;border:1px solid var(--ac);background:transparent;color:var(--tx)}
+button.p{background:var(--ac);color:#2a0a1e}
+#msg{margin-top:20px;color:var(--ac);min-height:1.5em}
+.h{position:fixed;bottom:-30px;color:var(--ac);opacity:.5;animation:up linear forwards;z-index:1;pointer-events:none}
+@keyframes up{to{transform:translateY(-110vh);opacity:0}}
+</style>
+</head>
+<body>
+<div class="card">
+<h1 id="t">Tumhare liye ♥</h1>
+<div id="poem"></div>
+<div class="btns" id="b">
+<button class="p" id="y">Haan</button>
+<button id="n">Abhi nahi</button>
+</div>
+<div id="msg"></div>
+</div>
+<script>
+var lines=[
+"Tumhari ‘na’ ne mujhe todna nahi, samjhna sikhaya,",
+"Tumhari izzat ka matlab aur bhi gehra samjhaya.",
+"Aaj phir dil ki baat lekar aaya hoon,",
+"Zabardasti nahi, sachchai saath laaya hoon.",
+"Dil ka jo tha, wahi haal keh diya,",
+"Na koi shart, na koi jaal, keh diya.",
+"Tum haan kaho to meri duniya roshan ho jaye,",
+"Na kaho to bhi dua hai ki duniya ki saari khushi tumhare naam ho jaye."
+];
+var box=document.getElementById('poem');
+lines.forEach(function(s){var d=document.createElement('div');d.className='l';d.textContent=s;box.appendChild(d)});
+var els=box.children;
+[].forEach.call(els,function(e,i){setTimeout(function(){e.classList.add('on')},800+i*1800)});
+setTimeout(function(){document.getElementById('b').classList.add('on')},800+lines.length*1800);
+document.getElementById('y').onclick=function(){document.getElementById('msg').textContent='Shukriya, tumne meri baat suni. ♥';for(var i=0;i<30;i++)heart()};
+document.getElementById('n').onclick=function(){document.getElementById('msg').textContent='Koi baat nahi. Tumhara jawab mere liye sabse zyada maayne rakhta hai.'};
+function heart(){var h=document.createElement('div');h.className='h';h.textContent='♥';h.style.left=Math.random()*100+'vw';h.style.fontSize=(14+Math.random()*26)+'px';h.style.animationDuration=(4+Math.random()*5)+'s';document.body.appendChild(h);setTimeout(function(){h.remove()},9000)}
+setInterval(heart,900);
+</script>
+</body>
+</html>
